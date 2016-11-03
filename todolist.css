@@ -75,6 +75,9 @@
   }
 
   /*中间内容区域*/
+  #content{
+    display: none;
+  }
   .content_list{
     display: flex;
     width: 100%;
@@ -100,13 +103,23 @@
     color: green;
     position: relative;
     top: -10px;
+    visibility: hidden;
   }
   .icon-cha{
     color: red;
     margin-right: 20px;
+    visibility: hidden;
   }
-
-
+  .active{
+    display: block !important;
+  }
+  .showV{
+    visibility:visible !important;
+  }
+  .fontDel{
+    text-decoration: line-through;
+    color: #eee;
+  }
 
   /*页脚部分*/
 
@@ -120,7 +133,7 @@
     align-items: center;
   }
 
-  .btn_num,.btn_do,.btn_done,.btn_clear{
+  .btn_do,.btn_done,.btn_clear{
     border: 1px solid #ccc;
     padding: 4px;
     border-radius: 4px;
@@ -133,17 +146,17 @@
 
   .btn_clear:hover{
     background:#ccc;
-    color:#fff
-  }
-  .btn_num:hover{
-    background:#ccc;
-    color:#fff
+    color:#fff;
   }
   .btn_do:hover{
     background:#ccc;
-    color:#fff
+    color:#fff;
   }
   .btn_done:hover{
     background:#ccc;
-    color:#fff
+    color:#fff;
+  }
+  .selected{
+    background:#ccc;
+    color:#fff;
   }
