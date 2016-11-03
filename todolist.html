@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>To-Do-List</title>
     <link rel="stylesheet" href="todolist.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_9nokqy209af6flxr.css">
   </head>
   <body>
     <div id="bg_container">
@@ -11,9 +12,35 @@
         <div class="top_title">
           To Do List
         </div>
-        <form action="">
-          <input type="text" placeholder="What Need To Be Done">
-        </form>
+        <div id='container_input'>
+          <span>
+            <i class="iconfont icon-jiantou"></i>
+          </span>
+          <form class="input_container"action="">
+            <input class="input_box" type="text" placeholder="What needs to be done?">
+          </form>
+        </div>
+        <div id="content">
+          <div class="content_list">
+            <div class="circle">
+              <i class="iconfont icon-gou"></i>
+            </div>
+            <div class="content_text">123456</div>
+            <i class="iconfont icon-cha"></i>
+          </div>
+        </div>
+        <div id='foot'>
+          <div class="btn_num">
+            剩余事项
+            <span>
+              18
+            </span>
+          </div>
+          <div class="btn_do">全部事项</div>
+          <div class="btn_done">完成事项</div>
+          <div class="btn_clear">删除完成事项</div>
+
+        </div>
 
       </div>
     </div>
