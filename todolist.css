@@ -113,6 +113,9 @@
   .active{
     display: block !important;
   }
+  .hide{
+    display: none;
+  }
   .showV{
     visibility:visible !important;
   }
