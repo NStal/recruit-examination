@@ -31,6 +31,7 @@
     * 数据可以存储在前台使用`localStorage`或者`indexedDb`
 * 使用TypeScript取代Javascript完成任务
 * 使用Less或类似的CSS预处理语言取代CSS
+* 用gulp/webpack/browserify构建你的编译流程。
 * 不借助任何前端框架或者，前端框架使用React或者Vue或者Backbone，尽可能不使用jQuery。
 * 功能尽可能的完善，页面尽可能的美观
     * 支持实时搜索
