@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/style.css">
+	<script src="js/main.js"></script>
+</head>
+<body>
+	<header>
+	    <h1>ToDoList Demon <span>v1.0</span></h1>
+	</header>
+	<div class="main">
+		<div class="addtodo">
+			<form>
+				<label for="newlist">添加新的事项</label>
+				<input id='newlist' name='newlist' placeholder='输入新的待办事项' type="text">
+				<input id='notseeit'>
+			</form>
+		</div>
+		<div class="todoing list">
+			<h2>待完成<span id='listnum-do' class='listnum'>0</span></h2>
+			<ol id='todoinglist'>
+				
+			</ol>
+		</div>
+		<div class="todocpl list">
+			<h2>已完成<span id='listnum-cpl' class='listnum'>0</span></h2>
+		    <ol id='todocpllist'>
+		    	
+		    </ol>
+		</div>
+		<div class="operation">
+		    <button id='cpl'>完成</button>
+			<button id='del'>删除</button>
+		</div>
+	</div>
+	<div class="foot">
+		<p>
+			仅用前端实现了勾选以及添加删除功能。
+			无保存功能，无后端。
+		</p>
+	</div>
+</body>
+</html>
