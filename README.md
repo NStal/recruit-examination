@@ -81,5 +81,5 @@
 * 注1：不需要实现用户系统，只需要支持Chrome浏览器。
 * 注2：最好能在2~5天内完成。
 * 注3：做不完没关系, 因为一般都做不完，尽力而为 
-* 注4：也许可以从这里开始 : [http://todomvc.com/](http://todomvc.com/)
+* 注4：也许可以从这里开始: [http://todomvc.com/](http://todomvc.com/)
 
