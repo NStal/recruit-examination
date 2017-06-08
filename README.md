@@ -70,13 +70,13 @@
 
 ## 提交
 学习使用Git/Github 并且给把这个测试完成的内容, 以Pull Request得形式发送给我们。
-或者将你的作品打包提交到[hr@jitaku.io](mailto:hr@fusroda.io)，标题为:`[技能测试]姓名-电话`。
+或者将你的作品打包提交到[hr@fusroda.io](mailto:hr@fusroda.io)，标题为:`[技能测试]姓名-电话`。
 或者提供给我们在线的访问地址。
 
 邮件的内容可以包括你做了那些东西，学了哪些新的东西，如果对我们的测试难易度或者形式有什么意见和建议也请帮助我们改进它 ：）
 
 ## 祝你顺利
-如果有问题可以发邮件到[dev@jitaku.io](mailto:hr@fusroda.io)询问
+如果有问题可以发邮件到[dev@fusroda.io](mailto:hr@fusroda.io)询问
 
 * 注1：不需要实现用户系统，只需要支持Chrome浏览器。
 * 注2：最好能在2~5天内完成。
