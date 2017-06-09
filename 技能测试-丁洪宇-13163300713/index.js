@@ -4,7 +4,7 @@ var vertices = [
     1.0, -1.0, -1.0, 1.0, -1.0, -1.0
 ];
 var v4PositionIndex = null;
-var gl, programObject;
+var gl, programObject, myImg, blurShader = false;
 
 var image = new Image();
 image.src = "test.jpg";
@@ -14,7 +14,8 @@ image.onload = function() {
 
 //高斯模糊(待完成，默认为初始效果)
 function blurGl() {
-    renderGl('shader-fs');
+    blurShader = true;
+    renderGl('shader-fs-blur');
 }
 
 //反色效果
@@ -59,9 +60,27 @@ function renderGl(fsh) {
 
     //将载入的纹理指定为0号纹理
     gl.activeTexture(gl.TEXTURE0);
-    var uniform = gl.getUniformLocation(programObject, "inputImageTexture");
-    //将0这个值推送到着色器的uniform变量中，告诉着色器我们要使用0号纹理。
-    gl.uniform1i(uniform, 0);
+    // var uniform = gl.getUniformLocation(programObject, "inputImageTexture");
+    // //将0这个值推送到着色器的uniform变量中，告诉着色器我们要使用0号纹理。
+    // gl.uniform1i(uniform, 0);
+
+
+    //模糊效果执行
+    if (blurShader) {
+        var textureSizeLocation = gl.getUniformLocation(programObject, "u_textureSize");
+        gl.uniform2f(textureSizeLocation, myImg.width, myImg.height);
+        var kernelLocation = gl.getUniformLocation(programObject, "u_kernel[0]");
+        var kernelWeightLocation = gl.getUniformLocation(programObject, "u_kernelWeight");
+
+        var edgeDetectKernel = [
+            0.045, 0.122, 0.045,
+            0.122, 0.332, 0.122,
+            0.045, 0.122, 0.045
+        ];
+
+        gl.uniform1fv(kernelLocation, edgeDetectKernel);
+        gl.uniform1f(kernelWeightLocation, computeKernelWeight(edgeDetectKernel));
+    }
 
     //清除
     gl.clearColor(0.0, 0.0, 0.0, 1.0);
@@ -70,9 +89,19 @@ function renderGl(fsh) {
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 }
 
+
+//生成权重比
+function computeKernelWeight(kernel) {
+    var weight = kernel.reduce(function(prev, curr) {
+        return prev + curr;
+    });
+    console.log(weight);
+    return weight <= 0 ? 1 : weight;
+}
+
 // WebGL初始化
 function init() {
-    var myImg = document.getElementById('myImg');
+    myImg = document.getElementById('myImg');
     var canvas = document.getElementById("canvas");
     gl = canvas.getContext("experimental-webgl");
     if (gl == null)

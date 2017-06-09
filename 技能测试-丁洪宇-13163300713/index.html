@@ -8,7 +8,7 @@
     <img id="myImg" style="width:512px;height:289px" src="test.jpg"></img>
     <div class="buttons" style="margin:10px 0">
         <button class="inverse" onclick="inverseGl()">反色效果</button>
-        <button class="blur" onclick="blurGl()">初始效果</button>
+        <button class="blur" onclick="blurGl()">模糊效果</button>
     </div>
     <canvas id="canvas"></canvas>
 
@@ -25,6 +25,14 @@
     <!--反色效果-->
     <script id="shader-fs-inverse" type="x-shader/x-fragment">
         precision mediump float; varying vec2 textureCoordinate; uniform sampler2D inputImageTexture; void main() { gl_FragColor = vec4(1.0-texture2D(inputImageTexture, textureCoordinate).rgb,1.0); }
+    </script>
+    <!--模糊效果-->
+    <script id="shader-fs-blur" type="x-shader/x-fragment">
+        precision mediump float; varying vec2 textureCoordinate; uniform sampler2D inputImageTexture; uniform vec2 u_textureSize; uniform float u_kernel[9]; uniform float u_kernelWeight; void main() { vec2 onePixel = vec2(1.0, 1.0) / u_textureSize; vec4 colorSum=texture2D(inputImageTexture,
+        textureCoordinate + onePixel * vec2(-1, -1)) * u_kernel[0] + texture2D(inputImageTexture, textureCoordinate + onePixel * vec2( 0, -1)) * u_kernel[1] + texture2D(inputImageTexture, textureCoordinate + onePixel * vec2(1,-1)) * u_kernel[2] + texture2D(inputImageTexture,
+        textureCoordinate + onePixel * vec2(-1, 0)) * u_kernel[3] + texture2D(inputImageTexture, textureCoordinate + onePixel * vec2( 0, 0)) * u_kernel[4] + texture2D(inputImageTexture, textureCoordinate + onePixel * vec2( 1, 0)) * u_kernel[5] + texture2D(inputImageTexture,
+        textureCoordinate + onePixel * vec2(-1, 1)) * u_kernel[6] + texture2D(inputImageTexture, textureCoordinate + onePixel * vec2( 0, 1)) * u_kernel[7] + texture2D(inputImageTexture,textureCoordinate + onePixel * vec2( 1, 1)) * u_kernel[8] ; gl_FragColor
+        = vec4((colorSum / u_kernelWeight).rgb, 1.0); }
     </script>
 
     <script src="index.js"></script>
