@@ -73,9 +73,7 @@ function renderGl(fsh) {
         var kernelWeightLocation = gl.getUniformLocation(programObject, "u_kernelWeight");
 
         var edgeDetectKernel = [
-            0.045, 0.122, 0.045,
-            0.122, 0.332, 0.122,
-            0.045, 0.122, 0.045
+            1, 1, 1, 1, 1, 1, 1, 1, 1
         ];
 
         gl.uniform1fv(kernelLocation, edgeDetectKernel);
