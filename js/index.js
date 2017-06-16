@@ -3,8 +3,17 @@ window.onload = function() {
     OText.onkeyup = function(e) {
         var e = e || event;
         if (e.keyCode !== 13 || /^\s*$/g.test(this.value)) return false;
-        todo.add("todo", this.value);
-        todo.saveData("todo", this.value);
+        var timestamp = new Date().getTime();
+        todo.add({
+            type: "todo",
+            value: this.value,
+            timestamp: timestamp
+        });
+        todo.saveData({
+            type: "todo",
+            value: this.value,
+            timestamp: timestamp
+        });
         todo.todoNum++;
         todo.numChange();
         this.value = "";
@@ -17,20 +26,44 @@ window.onload = function() {
 
         // 勾选事件
         if (target.nodeName.toLowerCase() === "input" && target.type === "checkbox") {　　　　　　　
-        	var val = target.parentNode.getElementsByTagName("p")[0].innerHTML;
+            var val = target.parentNode.getElementsByTagName("p")[0].innerHTML;
+            var timestamp = parseInt(target.getAttribute("data-timestamp"));
+
             if (target.checked || target.checked === "checked") {
-                todo.add("done", val);
-                todo.saveData("done",val);
+                todo.add({
+                    type: "done",
+                    value: val,
+                    timestamp: timestamp
+                });
+                todo.saveData({
+                    type: "done",
+                    value: val,
+                    timestamp: timestamp
+                });
                 todo.delete("todo", target.parentNode);
-                todo.deleteData("todo",val);
+                todo.deleteData({
+                    type:"todo",
+                    timestamp:timestamp
+                });
                 todo.todoNum--;
                 todo.doneNum++;
                 todo.numChange();
             } else {
-                todo.add("todo",val);
-                todo.saveData("todo",val);
+                todo.add({
+                    type: "todo",
+                    value: val,
+                    timestamp: timestamp
+                });
+                todo.saveData({
+                    type: "todo",
+                    value: val,
+                    timestamp: timestamp
+                });
                 todo.delete("done", target.parentNode);
-                todo.deleteData("done",val);
+                todo.deleteData({
+                    type:"done",
+                    timestamp:timestamp
+                });
                 todo.doneNum--;
                 todo.todoNum++;
                 todo.numChange();
@@ -39,15 +72,22 @@ window.onload = function() {
 
         // 删除事件
         if (target.nodeName.toLowerCase() === "a" && target.classList.contains("btn-delete")) {
-        	var val = target.parentNode.getElementsByTagName("p")[0].innerHTML;
+            var val = target.parentNode.getElementsByTagName("p")[0].innerHTML;
+            var timestamp = parseInt(target.getAttribute("data-timestamp"));
+
             if (target.parentNode.parentNode.parentNode.classList.contains("todoListBox")) {
-                todo.deleteData("todo",val);
+                todo.deleteData({
+                    type:"todo",
+                    timestamp:timestamp
+                });
                 todo.delete("todo", target.parentNode);
                 todo.todoNum--;
                 todo.numChange();
             } else {
-            	console.log(target.parentNode.getElementsByTagName("p")[0].value);
-                todo.deleteData("done",val);
+                todo.deleteData({
+                    type:"done",
+                    timestamp:timestamp
+                });
                 todo.delete("done", target.parentNode);
                 todo.doneNum--;
                 todo.numChange();

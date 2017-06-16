@@ -14,32 +14,45 @@
             }
         }
 
+        this.todoData = null;
         this.todoNum = 0;
         this.doneNum = 0;
     };
 
     Todo.prototype = {
         init: function() {
-            var data = null;
             if (JSON.parse(localStorage.getItem("todo"))) {
-                data = JSON.parse(localStorage.getItem("todo"))
+                this.todoData = JSON.parse(localStorage.getItem("todo"))
             } else {
-                data = [];
+                this.todoData = [];
             }
-            for (var i = 0; i < data.length; i++) {
-                if (data[i].done) {
-                    this.add("done", data[i].title);
+            for (var i = 0; i < this.todoData.length; i++) {
+                if (this.todoData[i].done) {
+                    this.add({
+                        type: "done",
+                        value: this.todoData[i].title,
+                        timestamp: this.todoData[i].timestamp
+                    });
                     this.doneNum++;
                     this.numChange();
                 } else {
-                    this.add("todo", data[i].title);
+                    this.add({
+                        type: "todo",
+                        value: this.todoData[i].title,
+                        timestamp: this.todoData[i].timestamp
+                    });
                     this.todoNum++;
                     this.numChange();
                 }
             }
 
         },
-        add: function(node, content) {
+        add: function(ops) {
+            /**
+             * ops.type
+             * ops.value
+             * ops.timestamp
+             */
             var OLi = document.createElement("li");
             var OInput = document.createElement("input");
             var OP = document.createElement("p");
@@ -50,16 +63,20 @@
             OA.href = "javascript:;";
             OA.className = "btn";
             OA.classList.add("btn-delete", "fr");
+
             OA.innerHTML = "X";
-            OP.innerHTML = content;
+            OP.innerHTML = ops.value;
             OLi.appendChild(OInput);
             OLi.appendChild(OP);
-
             OLi.appendChild(OA);
 
-            if (node === "todo") {
+            OInput.setAttribute("data-timestamp", ops.timestamp);
+            OA.setAttribute("data-timestamp", ops.timestamp);
+            OLi.setAttribute("data-timestamp", ops.timestamp);
+
+            if (ops.type === "todo") {
                 this.default_ops.todoNode.appendChild(OLi);
-            } else if (node === "done") {
+            } else if (ops.type === "done") {
                 OInput.checked = "checked";
                 this.default_ops.doneNode.appendChild(OLi);
             }
@@ -83,52 +100,47 @@
                 }
             }
         },
-        saveData: function(type, val) {
-            var data = null;
-            if (JSON.parse(localStorage.getItem("todo"))) {
-                data = JSON.parse(localStorage.getItem("todo"))
-            } else {
-                data = [];
-            }
+        saveData: function(ops) {
+            /**
+             * ops.type
+             * ops.value
+             * ops.timestamp
+             */
+
             var d = {};
-            if (type === "todo") {
-                d.title = val;
+
+            // console.log(ops.type,ops.value,ops.timestamp);
+
+            if (ops.type === "todo") {
+                d.title = ops.value;
                 d.done = false;
-                data.push(d);
-            } else if (type === "done") {
-                d.title = val;
+                d.timestamp = ops.timestamp;
+                this.todoData.push(d);
+            } else if (ops.type === "done") {
+                d.title = ops.value;
                 d.done = true;
-                data.push(d);
+                d.timestamp = ops.timestamp;
+                this.todoData.push(d);
             } else {
                 console.log("error:储存名称错误!");
             }
-            localStorage.setItem("todo", JSON.stringify(data));
+
+            localStorage.setItem("todo", JSON.stringify(this.todoData));
         },
-        deleteData: function(type, val) {
-            var data = null;
-            if (JSON.parse(localStorage.getItem("todo"))) {
-                data = JSON.parse(localStorage.getItem("todo"))
-            } else {
-                data = [];
-            }
-            var count = 0;
-            if (type === "todo") {
-                for (var i = 0; i < data.length; i++) {
-                    if (data[i].title === val && data[i].done === false) {
-                        data.splice(i, 1);
-                    }
+        deleteData: function(ops) {
+
+            for (var i = 0; i < this.todoData.length; i++) {
+                if (ops.type === "done" && this.todoData[i].done && this.todoData[i].timestamp === ops.timestamp) {
+                    this.todoData.splice(i, 1);
+                } else if (ops.type === "todo" && !this.todoData[i].done && this.todoData[i].timestamp === ops.timestamp) {
+                    this.todoData.splice(i, 1);
+                } else {
+                    console.log("找不到记录");
                 }
-            } else if (type === "done") {
-                for (var i = 0; i < data.length; i++) {
-                    if (data[i].title === val && data[i].done) {
-                        data.splice(i, 1);
-                    }
-                }
-            } else {
-                console.log("没有数据");
+
             }
 
-            localStorage.setItem("todo", JSON.stringify(data));
+            localStorage.setItem("todo", JSON.stringify(this.todoData));
         }
     };
 
