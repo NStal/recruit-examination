@@ -1,0 +1,146 @@
+body,html{
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+fieldset {
+    margin: 20px auto;
+    width: 600px;
+    box-sizing: border-box;
+}
+
+.input {
+    text-indent: 5px;
+    width: 85%;
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
+    height: 30px;
+}
+
+.top{
+    width: 15px;
+    height: 15px;
+    outline: none;
+    vertical-align: middle;
+}
+
+.sec-all {
+    float: left;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    background: url(../img/ico-3.png) no-repeat 5px 5px;
+    background-size: 20px 20px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin: 0 auto;
+    width: 600px;
+}
+
+ul li {
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 2px;
+    -webkit-box-shadow: 0 0 1px 1px #ccc;
+    -moz-box-shadow: 0 0 1px 1px #ccc;
+    box-shadow: 0 0 1px 1px #ccc;
+}
+
+ul li:nth-of-type(even) {
+    background: #f8f8f8;
+}
+
+ul li i {
+    margin-left: 5px;
+    font-style: normal;
+}
+
+ul li .time {
+    float: right;
+    font-size: 12px;
+    margin-right: 10px;
+    color: #666;
+}
+
+.delete {
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    float: right;
+    margin-top: 5px;
+    margin-right: 5px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    font-size: 14px;
+    width: 60px;
+    background: orange;
+    color: white;
+    cursor: pointer;
+}
+
+.delete:hover {
+    background: orangered;
+}
+
+img {
+    margin-left: 10px;
+    width: 20px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.edit {
+    display: none;
+    margin: 0 auto;
+    width: 600px;
+    font-size: 14px;
+    height: 40px;
+    line-height: 40px;
+    -webkit-box-shadow: 0 0 1px 1px #ccc;
+    -moz-box-shadow: 0 0 1px 1px #ccc;
+    box-shadow: 0 0 1px 1px #ccc;
+}
+
+.edit p {
+    margin: 0 30px;
+    height: 40px;
+    line-height: 40px;
+    display: inline-block;
+}
+
+.items2 a {
+    text-decoration: none;
+    color: #333;
+    display: inline-block;
+    line-height: 20px;
+    padding: 1px 3px;
+    margin-left: 5px;
+}
+
+.on {
+    -webkit-box-shadow: 0 0 2px orange;
+    -moz-box-shadow: 0 0 2px orange;
+    box-shadow: 0 0 2px orange;
+}
+
+.items3 a {
+    color: #333;
+    text-decoration: none;
+}
+
+.items3 a:hover {
+    text-decoration: underline;
+}
+
+.num{
+    margin-right: 5px;
+}

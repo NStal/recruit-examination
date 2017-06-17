@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title> Todos</title>
+  <link rel="stylesheet" href="css/pure-min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/font.css">
+</head>
+
+<body>
+  <div id="app">
+    <fieldset>
+      <legend>
+        New Todos
+      </legend>
+      <div class="pure-form clearfix">
+        <input type="text" v-model="newTodos.event" class="input" placeholder="What needs to be done?" @keyup.enter='create'>
+        <div class="setPriority">
+          <label>优先级：</label>
+          <select v-model="newTodos.priority">
+            <option selected>1</option>
+            <option>2</option>
+            <option>3</option>
+          </select>
+          <!-- <i class='add icon-plus' @click="create(index)"></i> -->
+        </div>
+      </div>
+    </fieldset>
+    <div v-if="all">
+      <div class="countBox">
+        <button @click='showSomeTodos(1)'>全部：<span>{{all}}</span></button>
+        <button @click='showSomeTodos(2)'>已完成: <span>{{finished}}</span></button>
+        <button @click='showSomeTodos(3)'>未完成: <span>{{unfinished}}</span></button>
+      </div>
+      <div class="sortBox">
+        <label>时间：<i :class="sortTimeUp ? 'icon-move-up' : 'icon-move-down'" @click='sort(1)'></i></label>
+        <label>优先级：<i :class="sortPriorityUp ? 'icon-move-up' : 'icon-move-down'" @click='sort(2)'></i></label>
+      </div>
+      <table class="pure-table pure-table-bordered">
+        <thead>
+          <tr>
+            <td><img :src="todos.selectAll ? 'img/ico-2.png' : 'img/ico-1.png'" @click="selectAllTodos"></td>
+            <td>内容</td>
+            <td>优先级</td>
+            <td>时间</td>
+            <td>删除</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(todo,index) in todos.content" v-if="todo.show">
+            <td><img :src="todo.completed ? 'img/ico-2.png' : 'img/ico-1.png'" @click="change(index)"></td>
+            <td :class="todo.completed ? 'finished' : ''">{{todo.event}}</td>
+            <td width="50px" :class="todo.completed ? 'finished' : ''">{{todo.priority}}</td>
+            <td width="90px" :class="todo.completed ? 'finished' : ''">{{todo.time}}</td>
+            <td>
+              <i class='icon-minus' @click="deleteTodo(index)"></i>
+              <!-- <button class="pure-button button-warning"  @click="deleteTodo(index)">delete</button> -->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+
+<script src="js/vue.js"></script>
+<script>
+new Vue({
+  el: '#app',
+  data: {
+    newTodos: {
+      event: '',
+      imgSrc: 'img/ico-1.png',
+      priority: 1,
+      time: '',
+      completed: false,
+      show: true
+    },
+    todos: {
+      selectAll: false,
+      content: []
+    },
+    sortTimeUp: true,
+    sortPriorityUp: true,
+  },
+  computed: {
+    'finished': function() {
+      return this.todos.content.filter((el) => {
+        return el.completed === true
+      }).length;
+    },
+    'unfinished': function() {
+      return this.todos.content.filter((el) => {
+        return el.completed === false
+      }).length;
+    },
+    'all': function() {
+      return this.finished + this.unfinished;
+    }
+  },
+  methods: {
+    create: function() {
+      if (!this.newTodos.event) {
+        return false;
+      } else {
+        this.newTodos.time = new Date().toLocaleString('cn-CN', { hour12: false });
+        this.todos.content.push(this.newTodos);
+        this.newTodos = {
+          event: '',
+          imgSrc: 'img/ico-1.png',
+          priority: 1,
+          time: '',
+          completed: false,
+          show: true
+        };
+      }
+    },
+    deleteTodo: function(index) {
+      this.todos.content.splice(index, 1);
+      if (this.all === 0) {
+        this.todos.selectAll = false;
+      }
+    },
+    change: function(index) {
+      this.todos.content[index].completed = !this.todos.content[index].completed;
+      if (this.todos.content[index].completed === true) {
+        this.todos.content[index].imgSrc = "img/ico-2.png";
+      } else {
+        this.todos.content[index].imgSrc = "img/ico-1.png";
+      }
+    },
+    sort(type) {
+      if (type === 1) {
+        this.sortTimeUp = !this.sortTimeUp;
+        if (this.sortTimeUp) {
+          this.todos.content.sort((a, b) => {
+            return new Date(a.time) - new Date(b.time);
+          })
+        } else {
+          this.todos.content.sort((a, b) => {
+            return new Date(b.time) - new Date(a.time);
+          })
+        }
+      } else {
+        this.sortPriorityUp = !this.sortPriorityUp;
+        if (this.sortPriorityUp) {
+          this.todos.content.sort((a, b) => {
+            return a.priority - b.priority;
+          })
+        } else {
+          this.todos.content.sort((a, b) => {
+            return b.priority - a.priority;
+          })
+        }
+      }
+    },
+    selectAllTodos() {
+      this.todos.selectAll = !this.todos.selectAll;
+      this.todos.content.forEach((el) => {
+        el.completed = this.todos.selectAll;
+      });
+    },
+    showSomeTodos(type) {
+      if (type === 1) {
+        this.todos.content.forEach((el) => {
+          el.show = true;
+        });
+      } else if(type === 2) {
+         this.todos.content.forEach((el) => {
+          el.show = el.completed;
+        });
+      } else if(type === 3) {
+         this.todos.content.forEach((el) => {
+          el.show = !el.completed;
+        });
+      }
+    }
+  }
+});
+</script>
+
+</html>

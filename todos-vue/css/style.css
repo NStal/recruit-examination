@@ -1,0 +1,102 @@
+#app {
+  width: 600px;
+  margin: 20px auto;
+}
+
+fieldset {
+  box-sizing: border-box;
+}
+
+table {
+  border: none;
+  margin: 10px auto;
+  width: 600px;
+}
+
+.input {
+  width: 63%;
+}
+
+img {
+  width: 20px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+td {
+  text-align: center;
+}
+
+td:first-of-type {
+  width: 20px;
+  text-align: center;
+}
+
+td:last-of-type {
+  width: 60px;
+  text-align: center;
+}
+
+.setPriority {
+  float: right;
+}
+
+select {
+  width: 60px;
+}
+
+.clearfix:after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+tbody tr:hover {
+  color: #5892f7;
+}
+
+td.finished {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.countBox,
+.sortBox {
+  margin: 10px 0;
+}
+
+.countBox button {
+  background-color: #a5c1f1;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.countBox span {
+  margin-right: 20px;
+}
+
+i {
+  cursor: pointer;
+}
+
+i.add {
+  float: right;
+  color: #fff;
+  line-height: 32px;
+  padding: 0 15px;
+  margin: 0 10px;
+  background-color: #5892f7;
+  border: 1px solid #5892f7;
+  border-radius: 5px;
+}
+
+.sortBox label {
+  margin-right: 13px;
+}
+
+.sortBox label:hover {
+  color: #5892f7;
+}

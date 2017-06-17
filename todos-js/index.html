@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> Todos</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <fieldset>
+        <legend>
+            New Todos
+        </legend>
+
+        <div>
+            <span class="sec-all"></span>
+            <input type="text" class="input" placeholder="What needs to be done?" maxlength="25">
+            <label><input type="checkbox" class="top">优先</label>
+        </div>
+    </fieldset>
+
+    <ul class="todoLists"></ul>
+
+    <div class="edit">
+        <p class="items1">
+            <span class="num">0</span>items left
+        </p>
+
+        <p class="items2">
+            <a href="javascript:;" class="all on">All</a>
+            <a href="javascript:;" class="active">Active</a>
+            <a href="javascript:;" class="completed">Completed</a>
+        </p>
+
+        <p class="items3">
+            <a href="javascript:;" class="clear">Clear completed</a>
+        </p>
+    </div>
+</body>
+
+<script src="js/main.js"></script>
+
+</html>
