@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TODOLIST</title>
+    <link href="css/index.css" type="text/css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="todo">
+        <header>
+            <h1>TODO</h1>
+        </header>
+        <section>
+            <p class="tip"></p>
+            <select class="star">
+                <option>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一般</option>
+                <option>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;重要</option>
+                <option>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;紧急</option>
+            </select>
+            <input class="task-input" type="text" value="" placeholder="回车键提交" />
+            <input class="add-task" type="submit" value="提交" />
+        </section>
+        <main>
+            <div class="detal">111111111111</div>
+            <div class="pattern">
+                <p class="pattern-title">排序模式</p>
+                <ul class="pattern-ul">
+                    <li class="sort-default pattern-select">默认</li>
+                    <li class="sort-star">优先级</li>
+                    <li class="sort-time">创建时间</li>
+                </ul>
+            </div>
+            <ul class="task-list">
+
+            </ul>
+        </main>
+    </div>
+    <script src="./todo.js"></script>
+</body>
+
+</html>
